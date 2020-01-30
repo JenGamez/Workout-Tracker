@@ -1,0 +1,3 @@
+const path = require('path');const { Seeder } = require('mongo-seeding');
+const config = {  database: {    name: 'mydbname',  },  dropDatabase: true,};const seeder = new Seeder(config);const collections = seeder.readCollectionsFromPath(  path.resolve('./mydb/data-import'),  {    transformers: [Seeder.Transformers.replaceDocumentIdWithUnderscoreId],  },);
+seeder  .import(collections)  .then(() => {    console.log('Success');  })  .catch(err => {    console.log('Error', err);  });
