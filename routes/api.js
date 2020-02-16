@@ -42,12 +42,25 @@ router.post("/api/workouts", (req, res) => {
 });
 
 
+
+
   // View (GET) the combined eight of multiple exercise on the "stats" page
-  // Ask Chris about getWorkoutsInRange() on api.js
+
+  router.get("/api/workouts/range", (req, res) => {
+    console.log("Getting exercise info")
+    Workout.find({})
+        .then(dbWorkout => {
+            res.json(dbWorkout)
+        })
+        .catch(err => {
+            res.status(400).json(err);
+        });
+});
+  
 
 
   router.get("/api/workouts", (req, res) => {
-    console.log("Getting exercise info")
+    console.log("Test get excerise info")
     Workout.find({})
         .then(dbWorkout => {
             res.json(dbWorkout)
