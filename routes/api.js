@@ -27,7 +27,7 @@ router.get("/api/workouts", (req, res) => {
 
 // add new workout
 router.post("/api/workouts", (req, res) => {
-  db.Workout.create({
+  Workout.create({
                 type: req.body.type,
                 name: req.body.name,
                 duration: req.body.duration,
@@ -70,9 +70,29 @@ router.post("/api/workouts", (req, res) => {
         });
 });
 
+router.put("/api/workouts/:id", (req, res) => {
+  console.log(req.params.id)
+  console.log(req.body)
+  // Workout.findByIdAndUpdate({
+  //   _id:req.params.id
+  // },
+
+  // )
+Workout.update({
+
+  _id: req.params.id
+},
+{
+  $push: { exercises: req.body }
+}
+).then(function (Workout) {
+  res.json(Workout)
+})
+})
 
 
-  //add the exercise to the previous workout - PUT- don't need to do this, but want to if have time
+
+  //add the exercise to the (previous workout - PUT- don't need to do this, but want to if have time
 // add new exercises to a new workout plan
 
   
